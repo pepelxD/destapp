@@ -1,0 +1,47 @@
+{
+  "name": "clansite",
+  "version": "1.0.0",
+  "description": "site for destiny",
+  "main": "app/server/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node app/app.js",
+    "build": "webpack"
+  },
+  "author": "Ryzhakov Andrey",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.6.2",
+    "koa-favicon": "^2.0.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "normalize.css": "^8.0.1",
+    "three": "^0.103.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "autoprefixer": "^9.5.1",
+    "babel-loader": "^8.0.5",
+    "copy-webpack-plugin": "^5.0.0",
+    "css-loader": "^2.1.1",
+    "css-mqpacker": "^7.0.0",
+    "cssnano": "^4.1.10",
+    "file-loader": "^3.0.1",
+    "mini-css-extract-plugin": "^0.5.0",
+    "postcss-combine-duplicated-selectors": "^7.0.0",
+    "postcss-csslock": "^1.0.0",
+    "postcss-import": "^12.0.1",
+    "postcss-loader": "^3.0.0",
+    "postcss-neogrid": "^1.1.0",
+    "postcss-nested": "^4.1.2",
+    "postcss-nested-ancestors": "^2.0.0",
+    "postcss-nested-vars": "^1.0.0",
+    "postcss-sprites": "^4.2.1",
+    "pug": "^2.0.3",
+    "pug-loader": "^2.4.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  }
+}
