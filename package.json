@@ -8,6 +8,9 @@
     "server": "node app/app.js",
     "build": "webpack"
   },
+  "engines" : { 
+    "node" : "10.15.2" 
+  },
   "resolutions": {
     "webpack/acorn": "6.1.1"
   },
