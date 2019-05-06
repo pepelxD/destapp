@@ -10,11 +10,12 @@ html(lang="en")
     body
         .content
             .wrapper
-                include header.pug
+                header
+                    include settings.pug
                 main
-                    //include clan.pug
-
-
-
+                    include clan.pug
+                footer
+                    .dinamic-content
         include preloader.pug
+        script(src="js/vendors~main.js")
         script(src="js/main.js")

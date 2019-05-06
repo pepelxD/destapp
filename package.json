@@ -8,6 +8,9 @@
     "server": "node app/app.js",
     "build": "webpack"
   },
+  "resolutions": {
+    "webpack/acorn": "6.1.1"
+  },
   "author": "Ryzhakov Andrey",
   "license": "ISC",
   "dependencies": {
@@ -16,11 +19,16 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "normalize.css": "^8.0.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "three": "^0.103.0"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "acorn": "^6.1.1",
     "autoprefixer": "^9.5.1",
     "babel-loader": "^8.0.5",
     "copy-webpack-plugin": "^5.0.0",

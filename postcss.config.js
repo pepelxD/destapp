@@ -11,8 +11,9 @@ let settings = {
       //'postcss-mixins': {silent: true}, // выбрать нужно
       //'postcss-sassy-mixins': {silent: true}, // между ними
       //'postcss-calc': {}, // хз
-      'postcss-csslock': {},
       'postcss-nested-ancestors': {}, // сомнительно что пригодиться, хотя в БЭМ именовании может быть полезен
+      
+      
       'postcss-nested': {}, // вложенные css правила 
       
       'postcss-nested-vars': {}, // переменные с областью видимости
@@ -22,8 +23,8 @@ let settings = {
         path: './dev/components/neoslide/img/spries/'
 
       }, */
-      
       'postcss-neogrid': {},
+      'postcss-csslock': {},
       /* 'postcss-sprites': {
         stylesheetPath: './app/css',
         spritePath: './app/img/',

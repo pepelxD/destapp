@@ -10,7 +10,7 @@ const developmentEnv = process.env.NODE_ENV === 'development';
 } */
 
 module.exports = {
-  mode: developmentEnv ? 'development' : 'production',
+  mode: 'development',
   entry: {
     main: './dev/client/main.js',
     style: './dev/client/style.css'
@@ -19,16 +19,16 @@ module.exports = {
     /* filename: (chunkData) => {
       return chunkData.chunk.name === 'main' ? 'assets/js/[name].js': 'assets/css/[name].css';
     }, */
-    filename: 'assets/js/[name].js',
-    chunkFilename: 'client/js/[name].js',
-    path: path.join(__dirname, 'app'),
-    publicPath: '/'
+    filename: 'js/[name].js',
+    chunkFilename: 'js/[name].js',
+    path: path.join(__dirname, 'app/assets'),
+    publicPath:  '/'
   },
-  /* optimization: {
+  optimization: {
     splitChunks: {
       chunks: 'all'
     }
-  }, */
+  },
   devtool: `source-map`,
   module: {
     rules: [
@@ -37,8 +37,8 @@ module.exports = {
         use: [{
           loader: 'file-loader',
           options: {
-            name: 'assets/img/[name].[ext]',
-            outputPath: url => url.slice(url.indexOf('/') + 1)
+            name: 'img/[name].[ext]',
+            publicPath: /* url => '/' + url.slice(url.indexOf('/') + 1) */ '/'
           }
         }]
       },
@@ -47,18 +47,19 @@ module.exports = {
         use: [{
           loader: 'file-loader',
           options: {
-            name: 'assets/font/[name].[ext]',
-            outputPath: url => url.slice(url.indexOf('/') + 1)
+            name: 'font/[name].[ext]',
+            publicPath: /* url => '/' + url.slice(url.indexOf('/') + 1) */ '/'
           }
         }]
       },
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [['@babel/preset-env', {modules: false}]]
+            presets: [['@babel/preset-env', {modules: false}], '@babel/react'],
+            plugins: ['@babel/plugin-syntax-dynamic-import']
           }
         }
       },
@@ -75,19 +76,19 @@ module.exports = {
     }), */
 
     new CopyPlugin([
-      {from: 'dev/server/config', to: 'config'},
-      {from: 'dev/server/controllers', to: 'controllers'},
-      {from: 'dev/server/app.js', to: 'app.js'},
-      {from: 'dev/server/*.ico', to: '[name].[ext]', test: /[A-Za-z].ico$/},
-      {from: 'dev/client/components/**/*.pug', to: 'templates/[name].pug'},
-      {from: 'dev/client/components/**/*.mp3', to: 'assets/static/[name].mp3'},
-      {from: 'dev/client/components/**/*.json', to: 'assets/static/[name].json'},
-      {from: 'dev/client/templates', to: 'templates'}
+      {from: 'dev/server/config', to: '../config'},
+      {from: 'dev/server/controllers', to: '../controllers'},
+      {from: 'dev/server/app.js', to: '../app.js'},
+      {from: 'dev/server/*.ico', to: '../[name].[ext]', test: /[A-Za-z].ico$/},
+      {from: 'dev/client/components/**/*.pug', to: '../templates/[name].pug'},
+      {from: 'dev/client/components/**/*.mp3', to: 'static/[name].mp3'},
+      {from: 'dev/client/components/**/*.json', to: 'static/[name].json'},
+      {from: 'dev/client/templates', to: '../templates'}
     ]),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: 'assets/css/[name].css',
+      filename: 'css/[name].css',
       //chunkFilename: "[id].css"
     })
     /* new webpack.HotModuleReplacementPlugin() */

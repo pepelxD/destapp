@@ -12,11 +12,9 @@ require('./controllers')(app);
 
 
 router.get('/', async function(ctx, next) {
-  console.log(ctx, 'before')
   ctx.body = ctx.render(path.join(__dirname, 'templates/mainPage.pug'), {
-    user: 'Unknown guest'
+    clans: ['Destiny', 'Clan-name1', 'Clan-name2']
   });
-  console.log(ctx, 'after')
   await next();
 });
 

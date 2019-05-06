@@ -5,6 +5,7 @@ export default class {
         this.infoClass = infoClass;
         this.fps = 50;
         this.time = 400;
+        this.applyButton = this.box.querySelector('.clan_apply');
     }
     _enterEventHandler(event) {
         if(event.keyCode === 13) {
@@ -25,14 +26,13 @@ export default class {
             target.style.transform = `rotateX(${deg}deg)`;
             steps--;
             if (Math.round(deg) === 90) {
-                console.log(steps, deg)
                 title.style.opacity = 0;
                 info.classList.remove('visually-hidden');
             }
             if (steps <= 0) {
                 target.removeAttribute('style');
                 cancelAnimationFrame(id);
-                target.querySelector('.clan_close').addEventListener('click', this._closeInfoHandler);
+                target.querySelector('.clan_info_close').addEventListener('click', this._closeInfoHandler);
             }
         }
         render();
@@ -40,6 +40,7 @@ export default class {
     _closeInfoHandler(event) {
         event.preventDefault();
         this._closeInfoAnimation(event.target.closest('.clan'));
+        this.applyButton.removeEventListener('click', this.applyHandler);
     }
     _closeInfoAnimation(target, fps = 50, time = 400) {
         let frame = 1000 / fps;
@@ -55,14 +56,13 @@ export default class {
             target.style.transform = `rotateX(${deg}deg)`;
             steps--;
             if (Math.round(deg) === 90) {
-                console.log(steps, deg)
                 title.removeAttribute('style');
                 info.classList.add('visually-hidden');
             }
             if (steps <= 0) {
                 target.removeAttribute('style');
                 cancelAnimationFrame(id);
-                target.querySelector('.clan_close').removeEventListener('click', this._closeInfoHandler);
+                target.querySelector('.clan_info_close').removeEventListener('click', this._closeInfoHandler);
             }
         }
         render();
@@ -86,13 +86,19 @@ export default class {
             return;
         }
         target.classList.add(`${this.btnClass}--active`);
-        document.addEventListener('animationend', function(event) {
-            
-        })
         document.addEventListener('animationend', this._removeActiveClassHandler);
+        this.applyButton.addEventListener('click', this.applyHandler);
         //target.addEventListener('keyup', this._removeActiveClassHandler);
     }
+    applyHandler(event) {
+        const clanName = event.target.name;
+        import('../../react-components/modal.jsx').then(({default: module}) => {
+            module(clanName, Array.from(document.querySelectorAll('.clan_apply')), 'apply-form.jsx');
+        });
+        this.applyButton.removeEventListener('click', this.applyHandler);
+    }
     init() {
+        this.applyHandler = this.applyHandler.bind(this);
         this._activeHandler = this._activeHandler.bind(this);
         this._showInfo = this._showInfoAnimation.bind(this);
         this._enterEventHandler = this._enterEventHandler.bind(this);
